@@ -1,8 +1,21 @@
 import React, { useState } from "react";
-import CheckboxExample from "./kutucuk";
+
 import SettingsComponent from "./ayarlar";
+
 function Form() {
-  const [company,setCompany]=useState("")
+  const [company, setCompany] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [title, setTitle] = useState("");
+  const [phone, setPhone] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [car, setCar] = useState("");
+  const [job1, setJob1] = useState(false);
+  const [job2, setJob2] = useState(false);
+  const [text, setText] = useState("");
+  const [task, setTask] = useState("");
+
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded shadow-md">
       <form>
@@ -11,7 +24,11 @@ function Form() {
             Company :
           </label>
           <div className="flex-grow">
-            <input  value={company} onChange={(e)=>setCompany(e.target.value)}    className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -20,7 +37,10 @@ function Form() {
             First Name :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              onChange={(e) => setFirstName(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -29,7 +49,10 @@ function Form() {
             Last Name :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              onChange={(e) => setLastName(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -38,7 +61,11 @@ function Form() {
             E-mail Address :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -47,7 +74,10 @@ function Form() {
             Title :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              onChange={(e) => setTitle(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -56,13 +86,25 @@ function Form() {
             Phone :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
         <div className="mb-4 flex items-center">
           <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-2/3">
-            <CheckboxExample />
+            <div className="flex">
+              <p className="">Cancel Registration :</p>
+
+              <input
+                className="ml-20"
+                type="checkbox"
+                checked={checked}
+                onChange={(e) => setChecked(e.target.checked)}
+              />
+            </div>
           </label>
         </div>
 
@@ -71,11 +113,14 @@ function Form() {
             252 Training Session:
           </label>
           <div className="flex-grow">
-            <select className="mt-1 p-2 w-full border border-gray-300 rounded">
-              <option value="Ford"> --Select a date-- </option>
-              <option value="Volvo" selected>
-                Volvo
-              </option>
+            <select
+              id="bntstate"
+              value={car}
+              onChange={(e) => setCar(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            >
+              <option value=""> --Select a date-- </option>
+              <option value="Volvo">Volvo</option>
               <option value="Fiat">Fiat</option>
             </select>
           </div>
@@ -83,7 +128,27 @@ function Form() {
 
         <div className="mb-4 flex items-center">
           <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            <SettingsComponent />
+            <div>
+              <label className="flex relative">Job fuction :</label>
+
+              <div className="ml-36 mb-2 flex w-72">
+                <input
+                  type="checkbox"
+                  checked={job1}
+                  onChange={(e) => setJob1(e.target.checked)}
+                />
+                <label className="text-lg">Campaign Management</label>
+              </div>
+
+              <div className="ml-36 mb-2 flex w-72">
+                <input
+                  type="checkbox"
+                  checked={job2}
+                  onChange={(e) => setJob2(e.target.checked)}
+                />
+                <label className="text-lg">CRM Administration</label>
+              </div>
+            </div>
           </label>
         </div>
 
@@ -92,7 +157,11 @@ function Form() {
             Dietary Requirements :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded"
+            />
           </div>
         </div>
 
@@ -101,15 +170,36 @@ function Form() {
             Expectations? :
           </label>
           <div className="flex-grow">
-            <textarea className="p-2 border border-gray-300 rounded w-full" />
+            <textarea
+              value={task}
+              onChange={(e) => setTask(e.target.value)}
+              className="p-2 border border-gray-300 rounded w-full"
+              style={{ resize: "none" }}
+            />
           </div>
         </div>
-        <button type="button" onClick={(e)=>{
-          console.log(company)
-       
-          }} className="bg-blue-500 text-white p-2 rounded ">AT</button>
+        <button
+          type="button"
+          onClick={(e) => {
+            console.log(
+              company,
+              firstName,
+              lastName,
+              email,
+              title,
+              phone,
+              car,
+              job1,
+              job2,
+              text,
+              task
+            );
+          }}
+          className="bg-blue-500 text-white p-2 rounded "
+        >
+          AT
+        </button>
       </form>
-
     </div>
   );
 }
