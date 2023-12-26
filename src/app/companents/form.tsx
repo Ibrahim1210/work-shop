@@ -2,6 +2,9 @@ import React, { useState } from "react";
 
 import SettingsComponent from "./ayarlar";
 
+//TODO:1 diger input tiplerini de forma ekle
+//handler Fonksiyonlari yukari tasi
+//
 function Form() {
   const [company, setCompany] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -15,6 +18,23 @@ function Form() {
   const [job2, setJob2] = useState(false);
   const [text, setText] = useState("");
   const [task, setTask] = useState("");
+  const [jobSelection,setJobSelection]=useState({
+    job3:false,
+    job4:true,
+    job5:true
+  })
+
+  const handleCompanyChange=(e:React.ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)
+
+  const onJobChange=(e:React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.id);
+    setJobSelection(prev=>{
+      const newState={...prev,[e.target.id]:e.target.checked}
+      return newState
+    })
+    //setJob1(e.target.checked)
+  
+  }
 
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded shadow-md">
@@ -26,7 +46,7 @@ function Form() {
           <div className="flex-grow">
             <input
               value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              onChange={handleCompanyChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -145,6 +165,48 @@ function Form() {
                   type="checkbox"
                   checked={job2}
                   onChange={(e) => setJob2(e.target.checked)}
+                />
+                <label className="text-lg">CRM Administration</label>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div className="mb-4 flex items-center">
+          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
+            <div>
+              <label className="flex relative">Job fuction :</label>
+
+              <div className="ml-36 mb-2 flex w-72">
+                <input
+                  type="checkbox"
+                  checked={jobSelection.job3}
+                  onChange={(e) => {
+                    setJobSelection(prev=>{
+                      const newState={...prev,job3:e.target.checked}
+                      return newState
+                    })
+                    //setJob1(e.target.checked)
+                  
+                  }}
+                />
+                <label className="text-lg">Campaign Management</label>
+              </div>
+
+              <div className="ml-36 mb-2 flex w-72">
+                <input
+                id="job4"
+                  type="checkbox"
+                  checked={jobSelection.job4}
+                  onChange={onJobChange}
+                />
+                <label className="text-lg">CRM Administration</label>
+              </div>
+              <div className="ml-36 mb-2 flex w-72">
+                <input
+                id="job5"
+                  type="checkbox"
+                  checked={jobSelection.job5}
+                  onChange={onJobChange}
                 />
                 <label className="text-lg">CRM Administration</label>
               </div>
