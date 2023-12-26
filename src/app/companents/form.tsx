@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CheckboxExample from "./kutucuk";
 import SettingsComponent from "./ayarlar";
 function Form() {
+  const [company,setCompany]=useState("")
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded shadow-md">
       <form>
@@ -10,7 +11,7 @@ function Form() {
             Company :
           </label>
           <div className="flex-grow">
-            <input className="mt-1 p-2 w-full border border-gray-300 rounded" />
+            <input  value={company} onChange={(e)=>setCompany(e.target.value)}    className="mt-1 p-2 w-full border border-gray-300 rounded" />
           </div>
         </div>
 
@@ -103,9 +104,12 @@ function Form() {
             <textarea className="p-2 border border-gray-300 rounded w-full" />
           </div>
         </div>
-
-        <button className="bg-blue-500 text-white p-2 rounded ">Submit</button>
+        <button type="button" onClick={(e)=>{
+          console.log(company)
+       
+          }} className="bg-blue-500 text-white p-2 rounded ">AT</button>
       </form>
+
     </div>
   );
 }
