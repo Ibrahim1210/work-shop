@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import SettingsComponent from "./ayarlar";
-
 //TODO:1 diger input tiplerini de forma ekle
 //handler Fonksiyonlari yukari tasi
 //
@@ -16,25 +14,43 @@ function Form() {
   const [car, setCar] = useState("");
   const [job1, setJob1] = useState(false);
   const [job2, setJob2] = useState(false);
-  const [text, setText] = useState("");
-  const [task, setTask] = useState("");
-  const [jobSelection,setJobSelection]=useState({
-    job3:false,
-    job4:true,
-    job5:true
-  })
+  const [dietaryrequirements, setdietaryrequirements] = useState<string>("");
+  const [expectations, setExpectations] = useState("");
+  const [jobSelection, setJobSelection] = useState({
+    job1: false,
+    job2: false,
+    job3: false,
+    job4: false,
+    job5: false,
+  });
 
-  const handleCompanyChange=(e:React.ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)
+  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setCompany(e.target.value);
+  const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setFirstName(e.target.value);
+  const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setLastName(e.target.value);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmail(e.target.value);
+  const handleTitleeChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.target.value);
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPhone(e.target.value);
+  const handleDietaryRequirementsChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => setdietaryrequirements(e.target.value);
+  const handleExpectationsChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => setExpectations(e.target.value);
 
-  const onJobChange=(e:React.ChangeEvent<HTMLInputElement>) => {
+  const onJobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.id);
-    setJobSelection(prev=>{
-      const newState={...prev,[e.target.id]:e.target.checked}
-      return newState
-    })
+    setJobSelection((prev) => {
+      const newState = { ...prev, [e.target.id]: e.target.checked };
+      return newState;
+    });
     //setJob1(e.target.checked)
-  
-  }
+  };
 
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded shadow-md">
@@ -58,7 +74,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
-              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+              onChange={handleFirstNameChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -70,7 +87,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+              onChange={handleLastNameChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -82,8 +100,9 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
+              value={email}
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleEmailChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -95,7 +114,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
-              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              onChange={handleTitleeChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -107,7 +127,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
-              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              onChange={handlePhoneChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -153,18 +174,20 @@ function Form() {
 
               <div className="ml-36 mb-2 flex w-72">
                 <input
+                  id="job1"
                   type="checkbox"
-                  checked={job1}
-                  onChange={(e) => setJob1(e.target.checked)}
+                  checked={jobSelection.job1}
+                  onChange={onJobChange}
                 />
                 <label className="text-lg">Campaign Management</label>
               </div>
 
               <div className="ml-36 mb-2 flex w-72">
                 <input
+                  id="job2"
                   type="checkbox"
-                  checked={job2}
-                  onChange={(e) => setJob2(e.target.checked)}
+                  checked={jobSelection.job2}
+                  onChange={onJobChange}
                 />
                 <label className="text-lg">CRM Administration</label>
               </div>
@@ -181,12 +204,11 @@ function Form() {
                   type="checkbox"
                   checked={jobSelection.job3}
                   onChange={(e) => {
-                    setJobSelection(prev=>{
-                      const newState={...prev,job3:e.target.checked}
-                      return newState
-                    })
+                    setJobSelection((prev) => {
+                      const newState = { ...prev, job3: e.target.checked };
+                      return newState;
+                    });
                     //setJob1(e.target.checked)
-                  
                   }}
                 />
                 <label className="text-lg">Campaign Management</label>
@@ -194,7 +216,7 @@ function Form() {
 
               <div className="ml-36 mb-2 flex w-72">
                 <input
-                id="job4"
+                  id="job4"
                   type="checkbox"
                   checked={jobSelection.job4}
                   onChange={onJobChange}
@@ -203,7 +225,7 @@ function Form() {
               </div>
               <div className="ml-36 mb-2 flex w-72">
                 <input
-                id="job5"
+                  id="job5"
                   type="checkbox"
                   checked={jobSelection.job5}
                   onChange={onJobChange}
@@ -220,8 +242,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <input
-              value={text}
-              onChange={(e) => setText(e.target.value)}
+              value={dietaryrequirements}
+              onChange={handleDietaryRequirementsChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             />
           </div>
@@ -233,8 +255,8 @@ function Form() {
           </label>
           <div className="flex-grow">
             <textarea
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
+              value={expectations}
+              onChange={handleExpectationsChange}
               className="p-2 border border-gray-300 rounded w-full"
               style={{ resize: "none" }}
             />
@@ -253,8 +275,8 @@ function Form() {
               car,
               job1,
               job2,
-              text,
-              task
+              dietaryrequirements,
+              expectations
             );
           }}
           className="bg-blue-500 text-white p-2 rounded "
