@@ -1,41 +1,26 @@
 import React, { useState } from "react";
+import { TextInput } from "./form/TextInput";
 
-//TODO:1 diger input tiplerini de forma ekle
-//handler Fonksiyonlari yukari tasi
-//
 function Form() {
-  const [company, setCompany] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [title, setTitle] = useState("");
-  const [phone, setPhone] = useState("");
   const [checked, setChecked] = useState(false);
-  const [car, setCar] = useState("");
-  const [job1, setJob1] = useState(false);
-  const [job2, setJob2] = useState(false);
   const [dietaryrequirements, setdietaryrequirements] = useState<string>("");
   const [expectations, setExpectations] = useState("");
+  const [user, setUser] = useState({
+    company: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    title: "",
+    phone: "",
+  });
+  const [userSelection, setUserSelection] = useState({
+    car: "",
+  });
   const [jobSelection, setJobSelection] = useState({
     job1: false,
     job2: false,
-    job3: false,
-    job4: false,
-    job5: false,
   });
 
-  const handleCompanyChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setCompany(e.target.value);
-  const handleFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFirstName(e.target.value);
-  const handleLastNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setLastName(e.target.value);
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handleTitleeChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value);
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setPhone(e.target.value);
   const handleDietaryRequirementsChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => setdietaryrequirements(e.target.value);
@@ -44,101 +29,62 @@ function Form() {
   ) => setExpectations(e.target.value);
 
   const onJobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.id);
     setJobSelection((prev) => {
       const newState = { ...prev, [e.target.id]: e.target.checked };
       return newState;
     });
-    //setJob1(e.target.checked)
   };
+  const onUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUser((prev) => {
+      const newState = { ...prev, [e.target.id]: e.target.value };
+      return newState;
+    });
+  };
+  const onUserSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setUserSelection((prev) => {
+      const newState = { ...prev, [e.target.id]: e.target.value };
+      return newState;
+    });
+  };
+
+  const formData = [
+    { id: "firstName", label: "First Name", onChange: onUserDataChange },
+    { id: "lastName", label: "Last Name", onChange: onUserDataChange },
+    { id: "email", label: "E-mail", onChange: onUserDataChange },
+    { id: "title", label: "Title", onChange: onUserDataChange },
+    { id: "phone", label: "Phone", onChange: onUserDataChange },
+    { id: "fax", label: "Fax", onChange: onUserDataChange },
+    { id: "company", label: "Company", onChange: onUserDataChange },
+  ];
+
+  const checkBoxSection = [
+    {
+      label: "Job fuction",
+      options: [
+        { id: "job1", label: "CRM", onChange: onJobChange },
+        { id: "job2", label: "CRM2", onChange: onJobChange },
+      ],
+      id: 1,
+    },
+  ];
 
   return (
     <div className="max-w-md mx-auto mt-4 p-4 bg-white rounded shadow-md">
       <form>
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            Company :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={company}
-              onChange={handleCompanyChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            First Name :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={firstName}
-              onChange={handleFirstNameChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            Last Name :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={lastName}
-              onChange={handleLastNameChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            E-mail Address :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={email}
-              type="email"
-              onChange={handleEmailChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            Title :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={title}
-              onChange={handleTitleeChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
-
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            Phone :
-          </label>
-          <div className="flex-grow">
-            <input
-              value={phone}
-              onChange={handlePhoneChange}
-              className="mt-1 p-2 w-full border border-gray-300 rounded"
-            />
-          </div>
-        </div>
+        {formData.map((data) => (
+          <TextInput
+            key={data.id}
+            value={user[data.id as keyof typeof user]}
+            id={data.id}
+            label={data.label}
+            onUserDataChange={onUserDataChange}
+          />
+        ))}
 
         <div className="mb-4 flex items-center">
           <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-2/3">
             <div className="flex">
               <p className="">Cancel Registration :</p>
-
               <input
                 className="ml-20"
                 type="checkbox"
@@ -155,9 +101,9 @@ function Form() {
           </label>
           <div className="flex-grow">
             <select
-              id="bntstate"
-              value={car}
-              onChange={(e) => setCar(e.target.value)}
+              id="car"
+              value={userSelection.car}
+              onChange={onUserSelectionChange}
               className="mt-1 p-2 w-full border border-gray-300 rounded"
             >
               <option value=""> --Select a date-- </option>
@@ -167,74 +113,28 @@ function Form() {
           </div>
         </div>
 
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            <div>
-              <label className="flex relative">Job fuction :</label>
-
-              <div className="ml-36 mb-2 flex w-72">
-                <input
-                  id="job1"
-                  type="checkbox"
-                  checked={jobSelection.job1}
-                  onChange={onJobChange}
-                />
-                <label className="text-lg">Campaign Management</label>
+        {checkBoxSection.map((section) => (
+          <div key={section.id} className="mb-4 flex items-center">
+            <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
+              <div>
+                <label className="flex relative">{section.label}</label>
+                {section.options.map((option) => (
+                  <div key={option.id} className="ml-36 mb-2 flex w-72">
+                    <input
+                      id={option.id}
+                      type="checkbox"
+                      checked={
+                        jobSelection[option.id as keyof typeof jobSelection]
+                      }
+                      onChange={onJobChange}
+                    />
+                    <label className="ml-4 text-lg">{option.label}</label>
+                  </div>
+                ))}
               </div>
-
-              <div className="ml-36 mb-2 flex w-72">
-                <input
-                  id="job2"
-                  type="checkbox"
-                  checked={jobSelection.job2}
-                  onChange={onJobChange}
-                />
-                <label className="text-lg">CRM Administration</label>
-              </div>
-            </div>
-          </label>
-        </div>
-        <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            <div>
-              <label className="flex relative">Job fuction :</label>
-
-              <div className="ml-36 mb-2 flex w-72">
-                <input
-                  type="checkbox"
-                  checked={jobSelection.job3}
-                  onChange={(e) => {
-                    setJobSelection((prev) => {
-                      const newState = { ...prev, job3: e.target.checked };
-                      return newState;
-                    });
-                    //setJob1(e.target.checked)
-                  }}
-                />
-                <label className="text-lg">Campaign Management</label>
-              </div>
-
-              <div className="ml-36 mb-2 flex w-72">
-                <input
-                  id="job4"
-                  type="checkbox"
-                  checked={jobSelection.job4}
-                  onChange={onJobChange}
-                />
-                <label className="text-lg">CRM Administration</label>
-              </div>
-              <div className="ml-36 mb-2 flex w-72">
-                <input
-                  id="job5"
-                  type="checkbox"
-                  checked={jobSelection.job5}
-                  onChange={onJobChange}
-                />
-                <label className="text-lg">CRM Administration</label>
-              </div>
-            </div>
-          </label>
-        </div>
+            </label>
+          </div>
+        ))}
 
         <div className="mb-4 flex items-center">
           <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
@@ -266,17 +166,11 @@ function Form() {
           type="button"
           onClick={(e) => {
             console.log(
-              company,
-              firstName,
-              lastName,
-              email,
-              title,
-              phone,
-              car,
-              job1,
-              job2,
+              userSelection,
+              user,
               dietaryrequirements,
-              expectations
+              expectations,
+              jobSelection
             );
           }}
           className="bg-blue-500 text-white p-2 rounded "
@@ -287,5 +181,6 @@ function Form() {
     </div>
   );
 }
+
 
 export default Form;
