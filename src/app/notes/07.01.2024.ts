@@ -69,32 +69,50 @@ const nestedObj6 = {
 };
 //console.log(nestedObj6);
 
-
 ///
-const deepNested= {
+const deepNested = {
   userName: "ibrahim",
   age: 25,
-  hobby: { tennis: true, football: false,extra:{info:{title:"title",header:"header"}} }
+  hobby: {
+    tennis: true,
+    football: false,
+    extra: { info: { title: "title", header: "header" } },
+  },
 };
 //{userName:"ibrahim",age:25, hobby: { tennis: true, football: false,extra:{info:{title:"title1",header:"header"}} }}
-const deepNested1={...deepNested,hobby:{...deepNested.hobby,extra:{...deepNested.hobby.extra,info:{...deepNested.hobby.extra.info,title:"title1"}}}}
+const deepNested1 = {
+  ...deepNested,
+  hobby: {
+    ...deepNested.hobby,
+    extra: {
+      ...deepNested.hobby.extra,
+      info: { ...deepNested.hobby.extra.info, title: "title1" },
+    },
+  },
+};
 
 //
 
-const state={
-  field1:"field1",
-  field2:"field2",
-  field3:"filed3"
-}
+const state = {
+  field1: "field1",
+  field2: "field2",
+  field3: "filed3",
+};
 
-const updateField1=(value:string)=>{
-  return {...state,field1:value}
-}
-const updateField2=(value:string)=>{
-  return {...state,field2:value}
-}
+const updateField1 = (value: string) => {
+  return { ...state, field1: value };
+};
+const updateField2 = (value: string) => {
+  return { ...state, field2: value };
+};
+const updateField3 = (value: string) => {
+  return { ...state, field3: value };
 
-console.log(updateField2("hllo"));
+  // //TODO: create updateField3
+};
 
-//TODO: create updateField3
-
+console.log(
+  updateField1("Field 1 new project"),
+  updateField2("Field 2 new project"),
+  updateField3("Field 3 new project")
+);
