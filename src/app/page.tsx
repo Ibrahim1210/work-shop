@@ -1,5 +1,5 @@
 "use client";
-import Form from "./companents/form";
+import Form from "./components/form";
 export default function Home() {
   return <Form />;
 }

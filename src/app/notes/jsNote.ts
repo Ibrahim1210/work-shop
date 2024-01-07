@@ -39,3 +39,6 @@ interface IGeneric<T> {
   
   console.log("myb3", myb3);
   console.log("myb4", myob4);
+
+
+  
