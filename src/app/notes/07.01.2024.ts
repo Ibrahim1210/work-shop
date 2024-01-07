@@ -146,6 +146,13 @@ const mainUpdate=(objKey:string,value:string)=>{
 }
 
 
+const hello={name1:"ibrahim",city:"alasehir",age:31}
+const {age,name1,...res}=hello
+//const res={name:"ibrahim",city:"alasehir"}
+//const res={city:"alasehir"}
+console.log(res,name1);
+
+
 //const updateField=(objKey:string,value:string)=>{
 //1.return {...state,feild4:"new valueueu4"}
 //2.return {  field1: "field1",field2: "field2",field3: "field3",feild4:"new valueueu4"}
