@@ -34,11 +34,15 @@ function Form() {
       return newState;
     });
   };
+
+  //input:ibrahim
+  //conts e={nativeevent:{},feild2:{},target:{value:"ibrahim",id:"company"}}
+
   const onUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUser((prev) => {
-      const newState = { ...prev, [e.target.id]: e.target.value };
-      return newState;
-    });
+    const updatedState={...user,[e.target.id]:e.target.value}
+    //{ firstName: "",lastName: "",email: "",title: "qtzeqwte",phone: "",company:"ibrahim"}
+    //{ firstName: "",lastName: "",email: "",phone: "",title:"qtzeqwtex"}
+    setUser(updatedState)
   };
   const onUserSelectionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setUserSelection((prev) => {

@@ -100,17 +100,54 @@ const state = {
 };
 
 const updateField1 = (value: string) => {
-  return { ...state, field1: value, field2: "", field3: "" };
+  return { ...state, field1: value };
 };
 
 const updateField2 = (value: string) => {
-  return { ...state, field2: value, field1: "", field3: "" };
+  return { ...state, field2: value};
 };
 
-const updateField3 = (value: string) => {
-  return { ...state, field3: value, field1: "", field2: "" };
+const updateField3 = (field3: string) => {
+  return { ...state, field3:field3 };
 };
 
-console.log(updateField1("Field 1 new project"));
+const updateField=(objKey:string,value:string)=>{
+return {...state,[objKey]:value}
+}
+
+const myName="ibrahim1"
+const myKey="privateKey"
+const testObj={ibrahim:myName}
+console.log(testObj);
+//{privateKey:"hello"}
+const testobj2={myKey:"hello"}
+const testObj3={[myName]:"hello4"};
+console.log(testObj3);
+/* console.log(updateField1("Field 1 new project"));
 console.log(updateField2("Field 2 new project"));
-console.log(updateField3("Field 3 new project"));
+console.log(updateField3("Field 3 new project")); */
+console.log(updateField("field1","new valueueu"));
+//const updateField=(objKey:string,value:string)=>{
+//return {...state,field1:"new valueueu"}
+//return {  field1: "field1",field2: "field2",field3: "field3",field1:"new valueueu"}
+//return {  field2: "field2",field3: "field3",field1:"new valueueu"}
+//}
+//
+//
+console.log(updateField("field2","new valueueu2"));
+console.log(updateField("field3","new valueueu3"));
+console.log(updateField("field4","new valueueu4"));
+
+const mainUpdate=(objKey:string,value:string)=>{
+  const testChield=()=>{
+    return {...state,[objKey]:value}
+  }
+  testChield()
+}
+
+
+//const updateField=(objKey:string,value:string)=>{
+//1.return {...state,feild4:"new valueueu4"}
+//2.return {  field1: "field1",field2: "field2",field3: "field3",feild4:"new valueueu4"}
+//3.return { field1: "field1",field2: "field2",field3: "field3",feild4:"new valueueu4"}
+//}
