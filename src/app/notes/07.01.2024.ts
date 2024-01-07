@@ -33,12 +33,12 @@ const nestedObj = {
 
 //1: {userName:"mehmet",age:25,hobby:{tennis:true,football:false}}
 const nestedObj2 = { ...nestedObj, userName: "mehmet" };
-console.log(nestedObj2);
+//console.log(nestedObj2);
 
 //2: {userName:"ahmet",city:"alasehir",age:25,hobby:{tennis:true,football:false}}
 
 const nestedObj3 = { ...nestedObj, userName: "ahmet", city: "alaşehir" };
-console.log(nestedObj3);
+//console.log(nestedObj3);
 
 //3.{userName:"ahmet",city:"alasehir",age:25,hobby:{tennis:true,football:true}}
 
@@ -48,7 +48,7 @@ const nestedObj4 = {
   city: "alaşehir",
   hobby: { ...nestedObj.hobby, football: true },
 };
-console.log(nestedObj4);
+//console.log(nestedObj4);
 
 //4.{userName:"ahmet",city:"alasehir",age:25,hobby:{tennis:false,football:false}}
 
@@ -58,7 +58,7 @@ const nestedObj5 = {
   city: "alaşehir",
   hobby: { ...nestedObj.hobby, tennis: false },
 };
-console.log(nestedObj5);
+//console.log(nestedObj5);
 
 //4.{userName:"ahmet",city:"alasehir",age:25,hobby:{tennis:false,football:true}}
 const nestedObj6 = {
@@ -67,4 +67,31 @@ const nestedObj6 = {
   city: "alaşehir",
   hobby: { tennis: false, fooball: true },
 };
-console.log(nestedObj6);
+//console.log(nestedObj6);
+
+
+///
+const deepNested= {
+  userName: "ibrahim",
+  age: 25,
+  hobby: { tennis: true, football: false,extra:{info:{title:"title",header:"header"}} }
+};
+//{userName:"ibrahim",age:25, hobby: { tennis: true, football: false,extra:{info:{title:"title1",header:"header"}} }}
+const deepNested1={...deepNested,hobby:{...deepNested.hobby,extra:{...deepNested.hobby.extra,info:{...deepNested.hobby.extra.info,title:"title1"}}}}
+
+//
+
+const state={
+  field1:"field1",
+  field2:"field2",
+  field3:"filed3"
+}
+
+const updateField1=(value:string)=>{
+  return {...state,field1:value}
+}
+const updateField2=(value:string)=>{
+  return {...state,field2:value}
+}
+
+console.log(updateField2("hllo"));
