@@ -96,23 +96,21 @@ const deepNested1 = {
 const state = {
   field1: "field1",
   field2: "field2",
-  field3: "filed3",
+  field3: "field3",
 };
 
 const updateField1 = (value: string) => {
-  return { ...state, field1: value };
+  return { ...state, field1: value, field2: "", field3: "" };
 };
+
 const updateField2 = (value: string) => {
-  return { ...state, field2: value };
+  return { ...state, field2: value, field1: "", field3: "" };
 };
+
 const updateField3 = (value: string) => {
-  return { ...state, field3: value };
-
-  // //TODO: create updateField3
+  return { ...state, field3: value, field1: "", field2: "" };
 };
 
-console.log(
-  updateField1("Field 1 new project"),
-  updateField2("Field 2 new project"),
-  updateField3("Field 3 new project")
-);
+console.log(updateField1("Field 1 new project"));
+console.log(updateField2("Field 2 new project"));
+console.log(updateField3("Field 3 new project"));
