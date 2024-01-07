@@ -10,20 +10,20 @@ const myObj3 = { ...myObj, val1: "val1 edited" };
 //{hell:"hello",val:"val",val1:"val1",val1:"val1 edited"}
 //overwrite
 //result: {hell:"hello",val:"val",val1:"val1 edited"}
-const user = { userName: "ibrahim", userId: 1 };
-const user1 = { ...user, userId: 2 };
-const user2 = { ...user, userName: "hello" };
-const user3 = { ...user, age: 15 };
-console.log("user==>", user);
-console.log("user1==>", user1);
-console.log("user2==>", user2);
-console.log("user3==>", user3);
-///
-const obj1 = { age: 15, name: "ibrahim" };
-const obj2 = { ...obj1, age: 10 };
-//@ts-ignore
-const obj3 = { age: 58, ...obj1 }; //{age:15,name:"Ibrahim"}
-console.log("obj3==>", obj3);
+// const user = { userName: "ibrahim", userId: 1 };
+// const user1 = { ...user, userId: 2 };
+// const user2 = { ...user, userName: "hello" };
+// const user3 = { ...user, age: 15 };
+// console.log("user==>", user);
+// console.log("user1==>", user1);
+// console.log("user2==>", user2);
+// console.log("user3==>", user3);
+// ///
+// const obj1 = { age: 15, name: "ibrahim" };
+// const obj2 = { ...obj1, age: 10 };
+// //@ts-ignore
+// const obj3 = { age: 58, ...obj1 }; //{age:15,name:"Ibrahim"}
+// console.log("obj3==>", obj3);
 //NESTED OBJECT
 const nestedObj = {
   userName: "ibrahim",
@@ -46,7 +46,7 @@ const nestedObj4 = {
   ...nestedObj,
   userName: "ahmet",
   city: "alaşehir",
-  hobby: { tennis: "true", fooball: "true" },
+  hobby: { ...nestedObj.hobby, football: true },
 };
 console.log(nestedObj4);
 
@@ -56,7 +56,7 @@ const nestedObj5 = {
   ...nestedObj,
   userName: "ahmet",
   city: "alaşehir",
-  hobby: { tennis: "false", fooball: "false" },
+  hobby: { ...nestedObj.hobby, tennis: false },
 };
 console.log(nestedObj5);
 
@@ -65,6 +65,6 @@ const nestedObj6 = {
   ...nestedObj,
   userName: "ahmet",
   city: "alaşehir",
-  hobby: { tennis: "false", fooball: "true" },
+  hobby: { tennis: false, fooball: true },
 };
 console.log(nestedObj6);
