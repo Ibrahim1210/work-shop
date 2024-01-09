@@ -152,6 +152,9 @@ const {age,name1,...res}=hello
 //const res={city:"alasehir"}
 console.log(res,name1);
 
+const hello3=[1,2,3,4]
+const hello4=hello3.map(el=>el*2)
+console.log(hello4);
 
 //const updateField=(objKey:string,value:string)=>{
 //1.return {...state,feild4:"new valueueu4"}

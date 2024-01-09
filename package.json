@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "notes":"npx ts-node ./src/app/notes/07.01.2024.ts"
+    "notes":"npx ts-node ./src/app/notes"
   },
   "dependencies": {
     "next": "14.0.4",
