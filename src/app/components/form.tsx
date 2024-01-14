@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextInput } from "./form/TextInput";
 import SubmitButton from "./form/SubmitButton";
 import Checkbox from "./form/Checkbox";
+import { CheckboxSection } from "./form/CheckBoxSection";
 
 function Form() {
   const [state, setState] = useState({
@@ -147,33 +148,14 @@ function Form() {
             </select>
           </div>
         </div>
-
-        {checkBoxSection.map((section) => (
-          <div key={section.id} className="mb-4 flex items-center">
-            <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-2/3">
-              <div>
-                <label className="flex relative">{section.label}</label>
-                {section.options.map((option) => (
-                  <Checkbox
-                    key={option.id}
-                    id={option.id}
-                    checked={
-                      jobSelection[option.id as keyof typeof jobSelection]
-                    }
-                    onChange={onJobChange}
-                    label={option.label}
-                    value={""}
-                  />
-                ))}
-              </div>
-            </label>
-          </div>
-        ))}
+        <CheckboxSection
+          checkBoxSection={checkBoxSection}
+          jobSelection={jobSelection}
+          onJobChange={onJobChange}
+        />
 
         <div className="mb-4 flex items-center">
-          <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
-            Dietary Requirements :
-          </label>
+          <Label text="Digital Requirements" />
           <div className="flex-grow">
             <input
               value={dietaryrequirements}
@@ -213,5 +195,13 @@ function Form() {
     </div>
   );
 }
+
+const Label = (props:any) => {
+  return (
+    <label className="flex-shrink-0 block text-sm font-semibold text-gray-600 w-1/3">
+      {props.text}
+    </label>
+  );
+};
 
 export default Form;
