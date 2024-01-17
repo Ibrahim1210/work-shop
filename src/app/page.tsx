@@ -1,6 +1,11 @@
 "use client";
-import Form from "./components/form";
-import { SearchHistory } from "./projects/SearchHistory";
+
+import TodoProjesi from "./projects/ToDoProject/todoProjesi";
+
 export default function Home() {
-  return <SearchHistory />;
+  return (
+    <>
+      <TodoProjesi />
+    </>
+  );
 }
