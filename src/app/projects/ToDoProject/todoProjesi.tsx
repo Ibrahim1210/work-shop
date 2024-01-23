@@ -2,6 +2,7 @@ import React, { ChangeEvent } from "react";
 import { useState } from "react";
 import { todoType } from "./appTypes";
 import { TodoItem } from "./TodoItem";
+import Axios from "axios";
 
 function TodoProjesi() {
   const [task, setTask] = useState<string>("");
@@ -15,14 +16,23 @@ function TodoProjesi() {
       setWorkDay(Number(event.target.value));
     }
   };
-
   const addNewTask = () => {
+    const apiUrl = "http://localhost:3000/task"; // apiUrl'yi burada tanımla
     const newTask = { taskName: task, workDay: workDay };
-    setTodoList([...todoList, newTask]);
-    setTask("");
-    setWorkDay(0);
-    console.log(todoList);
+
+    Axios.post(apiUrl, newTask)
+      .then((response) => {
+        console.log(response);
+        setTodoList([...todoList, newTask]);
+        setTask("");
+        setWorkDay(0);
+        console.log(todoList);
+      })
+      .catch((error) => {
+        console.error("Task eklenirken hata oluştu:", error);
+      });
   };
+
   const deleteTask = (nameToDelete: string): void => {
     setTodoList(
       todoList.filter((task) => {
