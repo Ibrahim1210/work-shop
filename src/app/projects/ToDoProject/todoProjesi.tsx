@@ -1,45 +1,51 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import { useState } from "react";
 import { todoType } from "./appTypes";
 import { TodoItem } from "./TodoItem";
 import Axios from "axios";
 
+const BASE_URL="http://localhost:3001"
+
 function TodoProjesi() {
+  const [todo,setTodo]=useState({taskName:"",workDay:0})
   const [task, setTask] = useState<string>("");
   const [workDay, setWorkDay] = useState<number>(0);
   const [todoList, setTodoList] = useState<todoType[]>([]);
+  const [refresh,setRefresh]=useState(true)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    
     if (event.target.name === "task") {
+      const newTodo={...todo,taskName:event.target.value}
+      setTodo(newTodo)
       setTask(event.target.value);
     } else {
+      const newTodo={...todo,workDay:Number(event.target.value)}
+      setTodo(newTodo)
       setWorkDay(Number(event.target.value));
     }
   };
-  const addNewTask = () => {
-    const apiUrl = "http://localhost:3000/task"; // apiUrl'yi burada tanımla
+  const addNewTask = async() => {
+    console.log("todo",todo);
+    const apiUrl = BASE_URL+"/task"; // apiUrl'yi burada tanımla
     const newTask = { taskName: task, workDay: workDay };
-
-    Axios.post(apiUrl, newTask)
-      .then((response) => {
-        console.log(response);
-        setTodoList([...todoList, newTask]);
-        setTask("");
-        setWorkDay(0);
-        console.log(todoList);
-      })
-      .catch((error) => {
-        console.error("Task eklenirken hata oluştu:", error);
-      });
+    const res=await Axios.post(apiUrl, todo)
+    setTodo({taskName:"",workDay:0})
+    setTask("")
+    setWorkDay(0)
+    setRefresh(!refresh)
   };
 
-  const deleteTask = (nameToDelete: string): void => {
-    setTodoList(
-      todoList.filter((task) => {
-        return task.taskName !== nameToDelete;
-      })
-    );
+  const deleteTask = async(deleteTask: todoType): Promise<void> => {
+    await Axios.delete(BASE_URL+"/task/"+deleteTask.id)
+    setRefresh(!refresh)
+    //getTodos()
   };
+  const getTodos=()=>{
+    Axios.get(`${BASE_URL}/task`).then(res=>setTodoList(res.data)).catch(error=>console.log(error))
+  }
+
+  useEffect(getTodos,[refresh])
   return (
     <div className="App">
       <div>
